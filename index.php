@@ -2,6 +2,9 @@
 add_action('user_register', 'my_function');
 
 function my_function($user_id) {
+// Pripojenie k inej databáze
+    include( 'pripojenie.php'); 
+
     $user = get_user_by('ID', $user_id);
     if (!$user) return;
 
@@ -38,6 +41,8 @@ add_action('woocommerce_customer_save_address', 'my_profile_update', 10, 2);
 
 function my_profile_update($user_id, $old_user_data) {
     // Pripojenie k inej databáze
+    include( 'pripojenie.php'); 
+
     $remote_conn = new mysqli(REMOTE_DB_HOST, REMOTE_DB_USER, REMOTE_DB_PASSWORD, REMOTE_DB_NAME);
     if ($remote_conn->connect_error) {
         die("Connection to remote database failed: " . $remote_conn->connect_error);
